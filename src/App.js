@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import { Add_Cmd } from './actions/action_1'
+import { connect } from 'react-redux'
 
-function App() {
+function App(props) {
+  console.log("props : ", props);
+
+  let cmd = "";
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input ref={x => cmd = x} placeholder="text will be passed as a commande"></input>
+      <button onClick={() => { props.Add_Cmd(cmd.value); console.log("input is  : ", cmd.value) }}>pass the command</button>
+      <div>{props.Cmd_State.map(e=><li key={e.id}>{e.text}</li>)}</div>
     </div>
   );
 }
 
-export default App;
+export default connect(
+  (state =>{ return {Cmd_State : state} }),
+  { Add_Cmd })
+  (App);
