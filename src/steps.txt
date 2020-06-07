@@ -8,3 +8,10 @@ npx create-react-app resto app
 npm i redux react-redux
 
 create store in index.js  && connect redux to react with Provider
+
+
+
+/***/
+getDishesFromApi
+
+getDishes
