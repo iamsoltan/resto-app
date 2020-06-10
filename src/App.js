@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import { getDishes } from './actions/action_1'
 import { connect } from 'react-redux'
 import Dishes from "./components/Dishes";
 import NavBar from "./components/Navbar";
@@ -48,7 +47,10 @@ function App(props) {
 
 }
 
-export default connect(
-  (state => { return { list: state } }),
-  { getDishes })
-  (App);
+// export default connect(
+//   (state => { return { list: state } }),
+//   { getDishes })
+//   (App);
+
+
+  export default App;

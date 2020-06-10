@@ -1,20 +1,21 @@
-import { ADD_USER, GET_DISHES } from './types';
+import * as types from './types';
 import Axios from 'axios';
 
-/***********************add user action package*********************************** */
 
-export const addUser2 = (user) => {
+/***********************register user action package*********************************** */
+
+export const registerUser2 = (user) => {
     const action = {
-        type: ADD_USER,
+        type: types.REGISTER_USER,
         user,
     }
     console.log("action addUser2 called : ", action);
     return action;
 }
-export function addUser(x) {
+export function registerUser(x) {
     let z = { ...x };
     Object.keys(z).map(e => { z[e] = z[e].value });
-    z = { ...z, cmdes_list: [] };
+    z = { ...z, role: "user", cmdes_list: [] };
     console.log("user object : ", z);
 
     let y;
@@ -34,24 +35,40 @@ export function addUser(x) {
                     "Content-Type": "application/json"
                 }
             });
-        dispatch(addUser2(z));
+        dispatch(registerUser2(z));
     }))
 }
-/***************************get dishes action package********************************** */
-export const getDishesFromApi = (payload) => {
+/***********************login user action package*********************************** */
+export const loginUser2 = (user) => {
     const action = {
-        type: GET_DISHES,
-        payload
+        type: types.LOGIN_USER,
+        user,
     }
+    console.log("action loginUser2 called : ", action);
     return action;
 }
 
-export function getDishes() {
-    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5ed8b2b52f5fd957fda3933e", {
+export function loginUser(x, y) {
+    let a;
+    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5edd2977655d87580c45ab65", {
         headers: {
             "secret-key": "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou"
         }
     }).then(res => {
-        dispatch(getDishesFromApi(res.data));
+        let z = [...res.data]
+        a = z.find(e => ((e.email === x) && (e.password === y)));
+        console.log("email: ", x, " password : ", y);
+
+        dispatch(loginUser2(a));
     }))
+}
+/***********************logout user action package*********************************** */
+
+export const logoutUser = () => {
+    const action = {
+        type: types.LOGOUT_USER,
+        user: "none"
+    }
+    console.log("action LOGOUT_USER called : ", action);
+    return action;
 }

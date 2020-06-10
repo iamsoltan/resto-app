@@ -1,19 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import "./Dishes.css";
-import { getDishes } from "../actions/action_1";
+import { getDishes } from "../actions/a_dishes";
+import { addToCart, removeFromCart } from "../actions/a_orders";
+
 import { connect } from "react-redux";
 
 function Dishes(props) {
-
   useEffect(() => {
     props.getDishes();
   }, []);
-  let Xlist = props.list;
+
+  
+  let menu = [...props.dishesList];
+
+  menu.map(e=>e.carted=false);  
+
+ const  changeCarted = (a,e) => {
+    e.carted = !e.carted;
+    if (a.target.className === "notCarted"){
+      a.target.className = "carted";
+      a.target.innerHTML="إحذف من السلة";
+      props.addToCart(e)
+    }else if (a.target.className === "carted"){
+      a.target.className = "notCarted";
+      a.target.innerHTML="أضف إلى سلة المشتريات";
+      props.removeFromCart(e.id);
+    };
+  }
   
   return (
     <div className="card-container">
       <div className="card-inner-container">
-        {Xlist.map((e) => (
+        {menu.map((e) => (
           <div key={e.id} className="card">
             <div
               className="image"
@@ -23,7 +41,7 @@ function Dishes(props) {
               <h4>{e.title}</h4>
               <h4>{` ${e.price} دينار`}</h4>
             </div>
-            <button>أضف إلى سلة المشتريات </button>
+            <button className="notCarted" onClick={a=>{changeCarted(a,e)}}> أضف إلى سلة المشتريات </button>
           </div>
         ))}
       </div>
@@ -33,7 +51,7 @@ function Dishes(props) {
 
 export default connect(
   (state) => {
-    return { list: state.list };
+    return { dishesList: state.r_dishes };
   },
-  { getDishes }
+  { getDishes, addToCart,removeFromCart }
 )(Dishes);

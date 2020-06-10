@@ -12,6 +12,28 @@ create store in index.js  && connect redux to react with Provider
 
 
 /***/
-getDishesFromApi
+Il y'a deux partie pour devlopper la plateforme de restauration une partie pour les clients et l'autee pour l administrateur dont
 
-getDishes
+l'utilisateur peut :
+
+Consulter les services
+
+Creer un compte pour passer une commande
+
+Consulter les commandes
+
+Supprimer ou modifié une commande
+
+Et l'administrateur peut ;
+
+consulter les commandes passés par les clients
+
+Accepter , Refuser les commandes
+
+ajouter , supprimer , editer les services
+
+​
+
+Bonus :
+
+Le client peut donner son avis sur le services

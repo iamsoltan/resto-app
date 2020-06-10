@@ -70,6 +70,37 @@
   color: blue;
   font-size: 30px;
 }
+.cart i {
+  position: relative;
+}
+.cart i span{
+  position: absolute;
+  background-color: goldenrod;
+  border: 2px solid black;
+  top: -7px;
+  right: -10px;
+  font-size: 20px;
+  border-radius: 30px;
+  color: white;
+  padding: 2px;
+}
+.auth-register{
+  border: 2px solid blue;
+  color: blue;
+
+}
+.auth-login{
+  border: 2px solid green;
+  color: green;
+
+}
+.auth-logout{
+  border: 2px solid red;
+  color: red;
+
+}
+
+
 /****************************************************************/
 .modal{
     direction: rtl;
