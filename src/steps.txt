@@ -37,3 +37,15 @@ ajouter , supprimer , editer les services
 Bonus :
 
 Le client peut donner son avis sur le services
+
+
+//////////////////
+Manipuler la base de données SQL
+Livrables
+un fichier texte
+Contexte du projet
+creer le diagramme d' entité pour présenter des données données 
+puis le shéma de base de données et ercriver des réquetes selon l'énoncé
+
+Modalités pédagogiques
+4 Heures

@@ -13,21 +13,13 @@ function Dishes(props) {
   
   let menu = [...props.dishesList];
 
-  menu.map(e=>e.carted=false);  
-
- const  changeCarted = (a,e) => {
-    e.carted = !e.carted;
-    if (a.target.className === "notCarted"){
-      a.target.className = "carted";
-      a.target.innerHTML="إحذف من السلة";
-      props.addToCart(e)
-    }else if (a.target.className === "carted"){
-      a.target.className = "notCarted";
-      a.target.innerHTML="أضف إلى سلة المشتريات";
-      props.removeFromCart(e.id);
-    };
-  }
-  
+  const cartAddBtn= (e)=>{
+    if (props.orders.map(a=>a.id).includes(e.id) === true) {
+           return <button className="carted" onClick={a=>{props.removeFromCart(e.id)}}>إحذف من السلة</button>
+    }else{
+       return <button className="notCarted" onClick={a=>{props.addToCart(e)}}> أضف إلى سلة المشتريات </button>}        
+    }
+    
   return (
     <div className="card-container">
       <div className="card-inner-container">
@@ -41,7 +33,7 @@ function Dishes(props) {
               <h4>{e.title}</h4>
               <h4>{` ${e.price} دينار`}</h4>
             </div>
-            <button className="notCarted" onClick={a=>{changeCarted(a,e)}}> أضف إلى سلة المشتريات </button>
+            {cartAddBtn(e)}
           </div>
         ))}
       </div>
@@ -51,7 +43,7 @@ function Dishes(props) {
 
 export default connect(
   (state) => {
-    return { dishesList: state.r_dishes };
+    return { dishesList: state.r_dishes,orders: state.r_orders };
   },
   { getDishes, addToCart,removeFromCart }
 )(Dishes);
