@@ -15,18 +15,10 @@ function Sidebar(props) {
     <React.Fragment>
       {props.user.role === "admin" ? (
         <div className="sidebar-container">
-          <NavLink
-            exact
-            to="/"
-            className="normal-sidebar"
-            activeClassName="active-sidebar"
-          >
-            menu
-          </NavLink>
-          <button>orders</button>
-          <button>users</button>
-          <button>testimonials</button>
-          <button>letter</button>
+          <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >menu</NavLink>
+          <NavLink exact to="/1" className="normal-sidebar" activeClassName="active-sidebar" >users</NavLink>
+          <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >testimonials</NavLink>
+          <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink>
         </div>
       ) : props.user.role === "user" ? (
         <div className="sidebar-container">

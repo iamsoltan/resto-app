@@ -7,6 +7,7 @@ import NavBar from "./components/Navbar";
 import Sidebar from './components/Sidebar';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
+import Editor from './components/Editor';
 import { getDishes } from "./actions/a_dishes";
 
 
@@ -27,7 +28,7 @@ function App(props) {
 
         {(props.user === "none") ?
           <div>
-            <div className="app-content">
+            <div className="app-container">
               <Switch>
                 <Route path="/" exact /*render={(props) => <Dishes {...props} />}*/ component={() => <Dishes />} />
                 <Redirect to="/" />
@@ -55,11 +56,14 @@ function App(props) {
               </div>
 
               : (props.user.role === "admin") ?
-                <div className="app-content">
+                <div className="app-container">
+                  <div className="app-inner-container">
+                  <div className="app-inner-inner-container">
+
                   <Switch>
                     <Route path="/" exact component={Dishes} />
-                    {/* <Route path="/add/:add" exact component={<Editor />} /> */}
-                    {/* <Route path="/edit/:dish/:iDish" component={<Editor />} /> */}
+                    <Route path="/add/:add"  component={() => <Editor />} />
+                    <Route path="/edit/:dish/:iDish"  component={() => <Editor />} />
                     {/* <Route path="/orders" component={<Orders />} /> */}
                     {/* <Route path="/orders/:order/:iOrder" component={<Editor />} /> */}
                     {/* <Route path="/notification" component={<notification />} /> */}
@@ -67,7 +71,9 @@ function App(props) {
                     {/* <Route path="/contact" component={<contact />} /> */}
                     <Redirect to="/" />
                   </Switch>
+                  </div>
                   <Sidebar />
+                </div>
                 </div>
                 : <div>euhhh !</div>
             : <div>euhhh !</div>
@@ -109,6 +115,8 @@ function App(props) {
 }
 
 export default connect(
-  (state => { return { user: state.r_users } }),
+  (state => { return {
+     user: state.r_users
+     } }),
   { getDishes })
   (App);
