@@ -34,38 +34,38 @@ export const setQuantity = (id,quantity) => {
 }
 
 /*********************** post order action package*********************************** */
-export const sendOrder = (order) => {
-    console.log("send order ", order);
+export const sendOrder2 = (order) => {
+    console.log("send order 2 called ", order);
     
     const action = {
         type: types.SEND_ORDER,
         order,
     }
-    console.log("action addUser2 called : ", action);
     return action;
 }
 
-// export function sendOrder2(x) {
+export function sendOrder(order,user) {
 
-
-
-//     let y;
-//     return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5ee27b7e655d87580c484cea", {
-//         headers: {
-//             "secret-key": "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou"
-//         }
-//     }).then(res => {
-//         y = [...res.data, z];
-//         /********************update database with new one*********************** */
-//         Axios.put("https://api.jsonbin.io/b/5ee27b7e655d87580c484cea",
-//             y,
-//             {
-//                 headers: {
-//                     'secret-key': "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou",
-//                     "versioning": "false",
-//                     "Content-Type": "application/json"
-//                 }
-//             });
-//         dispatch(registerUser2(z));
-//     }))
-// }
+    let valid_order = { orderinfo :[...order],delivery_status : "pending" ,userinfo : user} ;
+    console.log("send order called", valid_order);
+    
+    let y;
+    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5ee27b7e655d87580c484cea", {
+        headers: {
+            "secret-key": "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou"
+        }
+    }).then(res => {
+        y = [...res.data,valid_order ];
+        /********************update database with new one*********************** */
+        Axios.put("https://api.jsonbin.io/b/5ee27b7e655d87580c484cea",
+            y,
+            {
+                headers: {
+                    'secret-key': "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou",
+                    "versioning": "false",
+                    "Content-Type": "application/json"
+                }
+            });
+        dispatch(sendOrder2(valid_order));
+    }))
+}

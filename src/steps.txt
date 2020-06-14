@@ -16,11 +16,11 @@ Il y'a deux partie pour devlopper la plateforme de restauration une partie pour 
 
 l'utilisateur peut :
 
-Consulter les services
+Consulter les services +
 
-Creer un compte pour passer une commande
+Creer un compte pour passer une commande +
 
-Consulter les commandes
+Consulter les commandes 
 
 Supprimer ou modifié une commande
 

@@ -4,20 +4,81 @@ import './App.css';
 import { connect } from 'react-redux'
 import Dishes from "./components/Dishes";
 import NavBar from "./components/Navbar";
+import Sidebar from './components/Sidebar';
+import Testimonials from './components/Testimonials';
+import Footer from './components/Footer';
+import { getDishes } from "./actions/a_dishes";
+
+
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
 
 
 function App(props) {
-  console.log("props : ", props);
 
-  let cmd = "";
   // useEffect(
   //  props.getDishes,[]
   // );
+
+
   return (
     <React.Fragment>
-    <NavBar />
-    <Dishes />
-    </React.Fragment>
+      <Router>
+        <NavBar />
+
+        {(props.user === "none") ?
+          <div>
+            <div className="app-content">
+              <Switch>
+                <Route path="/" exact /*render={(props) => <Dishes {...props} />}*/ component={() => <Dishes />} />
+                <Redirect to="/" />
+                <Route />
+              </Switch>
+            </div>
+            <Testimonials />
+            <Footer />
+          </div>
+
+
+          : (props.user.role) ?
+            (props.user.role === "user") ?
+              <div className="app-container">
+                <div className="app-inner-container">
+                <Switch>
+                  <Route path="/" exact component={Dishes} />
+                  {/* <Route path="/orders" component={<Orders />} /> */}
+                  {/* <Route path="/notification" component={<notification />} /> */}
+                  {/* <Route path="/contact" component={<contact />} /> */}
+                  <Redirect to="/" />
+                </Switch>
+                <Sidebar />
+              </div>
+              </div>
+
+              : (props.user.role === "admin") ?
+                <div className="app-content">
+                  <Switch>
+                    <Route path="/" exact component={Dishes} />
+                    {/* <Route path="/add/:add" exact component={<Editor />} /> */}
+                    {/* <Route path="/edit/:dish/:iDish" component={<Editor />} /> */}
+                    {/* <Route path="/orders" component={<Orders />} /> */}
+                    {/* <Route path="/orders/:order/:iOrder" component={<Editor />} /> */}
+                    {/* <Route path="/notification" component={<notification />} /> */}
+                    {/* <Route path="/Letters" component={<Letters />} /> */}
+                    {/* <Route path="/contact" component={<contact />} /> */}
+                    <Redirect to="/" />
+                  </Switch>
+                  <Sidebar />
+                </div>
+                : <div>euhhh !</div>
+            : <div>euhhh !</div>
+        }
+
+      </Router>
+    </React.Fragment >
+
+
+
+
     // <div>
     //   {console.log("props.list : ", props.list)}
     //   <button onClick={props.getDishes}>get dishes list</button>
@@ -47,10 +108,7 @@ function App(props) {
 
 }
 
-// export default connect(
-//   (state => { return { list: state } }),
-//   { getDishes })
-//   (App);
-
-
-  export default App;
+export default connect(
+  (state => { return { user: state.r_users } }),
+  { getDishes })
+  (App);

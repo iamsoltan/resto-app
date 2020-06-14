@@ -19,14 +19,14 @@ export function registerUser(x) {
     console.log("user object : ", z);
 
     let y;
-    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5edd2977655d87580c45ab65", {
+    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5ee5e5fd0e966a7aa3690b21", {
         headers: {
             "secret-key": "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou"
         }
     }).then(res => {
         y = [...res.data, z];
         /********************update database with new one*********************** */
-        Axios.put("https://api.jsonbin.io/b/5edd2977655d87580c45ab65",
+        Axios.put("https://api.jsonbin.io/b/5ee5e5fd0e966a7aa3690b21",
             y,
             {
                 headers: {
@@ -50,7 +50,7 @@ export const loginUser2 = (user) => {
 
 export function loginUser(x, y) {
     let a;
-    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5edd2977655d87580c45ab65", {
+    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5ee5e5fd0e966a7aa3690b21", {
         headers: {
             "secret-key": "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou"
         }

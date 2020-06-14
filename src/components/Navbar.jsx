@@ -30,6 +30,7 @@ function Navbar(props) {
   let cancelButton2;
   let cancelButton3;
   let cancelButton3Bis;
+  let cancelButton4;
 
   const logout = () => {
     console.log("logout");
@@ -61,7 +62,7 @@ function Navbar(props) {
     {setmDisplay1("none")}
     else if( (e.target ===modalOverlay2) ||(e.target ===cancelButton2) ||( e.target === submitButton2)){
     setmDisplay2("none")}    
-    else if( (e.target ===modalOverlay3) ||(e.target ===cancelButton3) ||( e.target === submitButton3) ||(e.target === cancelButton3Bis)){
+    else if( (e.target ===modalOverlay3) ||(e.target ===cancelButton3) ||( e.target === submitButton3) ||(e.target === cancelButton3Bis) || (e.target === cancelButton4)){
       setmDisplay3("none")}
   };
   let total = (x) =>{
@@ -72,7 +73,7 @@ function Navbar(props) {
   }
   
   return (
-    <React.Fragment>
+    <nav className="nav">
       <div className="navbar-container">
         <div className="navbar-inner-container">
           <div className="logo"><i className="fa fa-rebel" aria-hidden="true"></i>  مطعم السلطان  <i className="fa fa-rebel" aria-hidden="true"></i></div>
@@ -160,15 +161,30 @@ function Navbar(props) {
                       <p>دينار </p>
 
               </div>
-              <div className="carted-btns">
-                <button ref={e=>submitButton3=e} onClick={e=>{sendOrder(props.orders);cancel(e)}} className="confirm-o">تأكيد الطلب</button>
+              {props.user === "none" ?
+                <div>
+                  <p className="notification">عليك بالدخول إلى حسابك أو تسجيل حساب جديد إذا كنت لاتملك واحدا ! </p>
+                <div className="carted-btns">
+                  <button ref={e=>cancelButton4=e} onClick={e=>{cancel(e);Oregister()}} className="confirm-o">تسجيل حساب جديد</button>
+                  <button ref={e=>submitButton3=e} onClick={e=>{cancel(e);Ologin()}} className="confirm-o">الدخول إلى حسابك</button>
+                  <button ref={e=>cancelButton3=e} onClick={e=>cancel(e)} className="cancel-o">إخفاء</button>
+                </div>
+                </div>
+              : 
+                <div>
+                <div className="carted-btns">
+                <button ref={e=>submitButton3=e} onClick={e=>{props.sendOrder(props.orders,props.user);cancel(e)}} className="confirm-o">تأكيد الطلب</button>
                 <button ref={e=>cancelButton3=e} onClick={e=>cancel(e)} className="cancel-o">إخفاء</button>
               </div>
+
+              </div>
+              }
           </div> 
           }
         </div>
       </div>
-    </React.Fragment>
+      </nav>
+
   );
 }
 

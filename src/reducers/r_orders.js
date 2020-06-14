@@ -18,7 +18,11 @@ const r_orders = (state = [], action) => {
                 e.quantity = action.quantity; return e
             } else { return e }
         });
+    } else if (action.type === types.REMOVE_FROM_CART) {
+        return state.filter(e => e.id !== action.id)
 
+    } else if (action.type === types.SEND_ORDER) {
+        return []
     } else {
         return state
     }

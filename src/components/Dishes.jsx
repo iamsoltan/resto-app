@@ -22,7 +22,7 @@ function Dishes(props) {
     
   return (
     <div className="card-container">
-      <div className="card-inner-container">
+      
         {menu.map((e) => (
           <div key={e.id} className="card">
             <div
@@ -36,7 +36,7 @@ function Dishes(props) {
             {cartAddBtn(e)}
           </div>
         ))}
-      </div>
+      
     </div>
   );
 }
