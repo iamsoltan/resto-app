@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import { getDishes } from "../actions/a_dishes";
-import { addToCart, removeFromCart } from "../actions/a_orders";
+import { addToCart, removeFromCart } from "../actions/a_cart";
 
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -16,6 +16,7 @@ function Sidebar(props) {
       {props.user.role === "admin" ? (
         <div className="sidebar-container">
           <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >menu</NavLink>
+          <NavLink exact to="/orders" className="normal-sidebar" activeClassName="active-sidebar" >orders</NavLink>
           <NavLink exact to="/1" className="normal-sidebar" activeClassName="active-sidebar" >users</NavLink>
           <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >testimonials</NavLink>
           <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink>

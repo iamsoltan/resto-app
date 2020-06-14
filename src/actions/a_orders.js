@@ -1,71 +1,28 @@
 import * as types from './types';
 import Axios from 'axios';
 
-/***********************add to cart action package*********************************** */
 
-export const addToCart = (element) => {
-    const action = {
-        type: types.ADD_TO_CART,
-        el: element
-    }
-    console.log("action ADD_TO_CART called : ", action);
-    return action;
-}
-/***********************remove from cart action package*********************************** */
-
-export const removeFromCart = (id) => {
-    const action = {
-        type: types.REMOVE_FROM_CART,
-        id
-    }
-    console.log("action REMOVE_FROM_CART called : ", action);
-    return action;
-}
-/***********************set quantity action package*********************************** */
-
-export const setQuantity = (id,quantity) => {
-    const action = {
-        type: types.SET_QUANTITY,
-        id,
-        quantity
-    }
-    console.log("action SET_QUANTITY called : ", action);
-    return action;
-}
-
-/*********************** post order action package*********************************** */
-export const sendOrder2 = (order) => {
-    console.log("send order 2 called ", order);
+/*********************** get Orders*********************************** */
+export const getOrders2 = (payload) => {
+    console.log("GET_ORDERS called ", payload);
     
     const action = {
-        type: types.SEND_ORDER,
-        order,
+        type: types.GET_ORDERS,
+        payload,
     }
     return action;
 }
 
-export function sendOrder(order,user) {
+export function getOrders() {
 
-    let valid_order = { orderinfo :[...order],delivery_status : "pending" ,userinfo : user} ;
-    console.log("send order called", valid_order);
-    
     let y;
-    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5ee27b7e655d87580c484cea", {
+    return ((dispatch) => Axios.get("https://api.jsonbin.io/b/5ee665d20e966a7aa3694954", {
         headers: {
             "secret-key": "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou"
         }
     }).then(res => {
-        y = [...res.data,valid_order ];
-        /********************update database with new one*********************** */
-        Axios.put("https://api.jsonbin.io/b/5ee27b7e655d87580c484cea",
-            y,
-            {
-                headers: {
-                    'secret-key': "$2b$10$5ezr.oHY3Mqsd0gwv19NQ.B8Bs9.ilzJ.4B6mz.jVsFhDD1tmeAou",
-                    "versioning": "false",
-                    "Content-Type": "application/json"
-                }
-            });
-        dispatch(sendOrder2(valid_order));
+        y = [...res.data ];
+        dispatch(getOrders2(y));
     }))
 }
+

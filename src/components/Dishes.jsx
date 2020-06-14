@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Dishes.css";
 import { getDishes } from "../actions/a_dishes";
-import { addToCart, removeFromCart } from "../actions/a_orders";
+import { addToCart, removeFromCart } from "../actions/a_cart";
 import { NavLink } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -14,7 +14,7 @@ function Dishes(props) {
   let menu = [...props.dishesList];
 
   const cartAddBtn = (e) => {
-    if (props.orders.map((a) => a.id).includes(e.id) === true) {
+    if (props.carted.map((a) => a.id).includes(e.id) === true) {
       return (
         <button
           className="carted"
@@ -121,7 +121,7 @@ export default connect(
   (state) => {
     return {
       dishesList: state.r_dishes,
-      orders: state.r_orders,
+      carted: state.r_cart,
       user: state.r_users,
     };
   },

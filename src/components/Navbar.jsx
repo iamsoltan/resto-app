@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from "react";
 import "./Navbar.css";
 import { registerUser,loginUser, logoutUser } from "../actions/a_users";
-import { setQuantity, removeFromCart, sendOrder} from "../actions/a_orders";
+import { setQuantity, removeFromCart, sendOrder} from "../actions/a_cart";
 import { connect } from "react-redux";
 import logo from "../logo.png";
 
@@ -89,7 +89,7 @@ function Navbar(props) {
               <div style={{display:displayLogin}} className="auth-register" onClick={Oregister}>تسجيل</div>
             </div>
             <div className="cart" onClick={() => {console.log("Open carted");setmDisplay3("block")}}>
-              <i className="fa fa-shopping-cart" aria-hidden="true"><span>{props.orders.length}</span></i>
+              <i className="fa fa-shopping-cart" aria-hidden="true"><span>{props.carted.length}</span></i>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@ function Navbar(props) {
       </div>
       <div className="modal" ref={e=>modalOverlay3=e} onClick={e=>cancel(e)} style={{display:mDisplay3}}>
         <div className="carted-m">       
-          { props.orders.length === 0 ? 
+          { props.carted.length === 0 ? 
             <div className="empty-cart">
             <p>سلة المشتريات فارغة</p>
             <p>الرجاء إضافة الأطباق المرغوب بها</p>
@@ -143,7 +143,7 @@ function Navbar(props) {
               <th>ثمن   أطباق</th> 
               <th>حذف الطبق</th> 
             </tr>
-            {props.orders.map(e=>
+            {props.carted.map(e=>
               
             <tr key={e.id}>
               <td  className="carted-img" style={{ backgroundImage: `url( ${e.img} )` }}></td>
@@ -157,7 +157,7 @@ function Navbar(props) {
             </table>
             <div className="total">
                       <h4>الثمن الجملي :</h4>
-                      <p>{total(props.orders)}</p>
+                      <p>{total(props.carted)}</p>
                       <p>دينار </p>
 
               </div>
@@ -173,7 +173,7 @@ function Navbar(props) {
               : 
                 <div>
                 <div className="carted-btns">
-                <button ref={e=>submitButton3=e} onClick={e=>{props.sendOrder(props.orders,props.user);cancel(e)}} className="confirm-o">تأكيد الطلب</button>
+                <button ref={e=>submitButton3=e} onClick={e=>{props.sendOrder(props.carted,props.user);cancel(e)}} className="confirm-o">تأكيد الطلب</button>
                 <button ref={e=>cancelButton3=e} onClick={e=>cancel(e)} className="cancel-o">إخفاء</button>
               </div>
 
@@ -190,7 +190,7 @@ function Navbar(props) {
 
 export default connect(
   (state) => {
-    return { user: state.r_users, orders : state.r_orders };
+    return { user: state.r_users, carted : state.r_cart };
   },
   { registerUser,loginUser, logoutUser, setQuantity, removeFromCart, sendOrder }
 )(Navbar);

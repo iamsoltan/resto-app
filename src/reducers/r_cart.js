@@ -1,18 +1,34 @@
 import * as types from '../actions/types';
 
-const r_orders = (state = [], action) => {
+const r_cart = (state = [], action) => {
 
-    if (action.type === types.GET_ORDERS) {
-        
-        console.log("orders state : ", action.payload );
-        return action.payload
+    if (action.type === types.ADD_TO_CART) {
+        action.el.quantity = 1;
+        console.log("carted : ", [...state, action.el]);
 
+
+        return [...state, action.el]
+
+    } else if (action.type === types.REMOVE_FROM_CART) {
+        return state.filter(e => e.id !== action.id)
+
+    } else if (action.type === types.SET_QUANTITY) {
+        return state.map(e => {
+            if (e.id === action.id) {
+                e.quantity = action.quantity; return e
+            } else { return e }
+        });
+    } else if (action.type === types.REMOVE_FROM_CART) {
+        return state.filter(e => e.id !== action.id)
+
+    } else if (action.type === types.SEND_ORDER) {
+        return []
     } else {
         return state
     }
 }
 
-export default r_orders;
+export default r_cart;
 
 // [{
 //     userInfo: {

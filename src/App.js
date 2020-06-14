@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import Editor from './components/Editor';
+import Orders from './components/Orders';
 import { getDishes } from "./actions/a_dishes";
 
 
@@ -64,7 +65,7 @@ function App(props) {
                     <Route path="/" exact component={Dishes} />
                     <Route path="/add/:add"  component={() => <Editor />} />
                     <Route path="/edit/:dish/:iDish"  component={() => <Editor />} />
-                    {/* <Route path="/orders" component={<Orders />} /> */}
+                    <Route path="/orders" component={Orders} />
                     {/* <Route path="/orders/:order/:iOrder" component={<Editor />} /> */}
                     {/* <Route path="/notification" component={<notification />} /> */}
                     {/* <Route path="/Letters" component={<Letters />} /> */}

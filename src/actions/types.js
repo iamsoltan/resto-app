@@ -11,3 +11,6 @@ export const SEND_ORDER = "SEND_ORDER";
 export const GET_DISHES = "GET_DISHES";
 export const ADD_DISHES = "ADD_DISHES";
 export const UPDATE_DISHES = "UPDATE_DISHES";
+
+
+export const GET_ORDERS = "GET_ORDERS";
