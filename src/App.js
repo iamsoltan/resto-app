@@ -9,6 +9,7 @@ import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import Editor from './components/Editor';
 import Orders from './components/Orders';
+import Users from './components/Users';
 import { getDishes } from "./actions/a_dishes";
 
 
@@ -45,6 +46,7 @@ function App(props) {
             (props.user.role === "user") ?
               <div className="app-container">
                 <div className="app-inner-container">
+                <div className="app-inner-inner-container">
                 <Switch>
                   <Route path="/" exact component={Dishes} />
                   <Route path="/orders" component={Orders} />
@@ -52,6 +54,7 @@ function App(props) {
                   {/* <Route path="/contact" component={<contact />} /> */}
                   <Redirect to="/" />
                 </Switch>
+                </div>
                 <Sidebar />
               </div>
               </div>
@@ -66,7 +69,7 @@ function App(props) {
                     <Route path="/add/:add"  component={() => <Editor />} />
                     <Route path="/edit/:dish/:iDish"  component={() => <Editor />} />
                     <Route path="/orders" component={Orders} />
-                    {/* <Route path="/orders/:order/:iOrder" component={<Editor />} /> */}
+                    <Route path="/users" component={Users} />
                     {/* <Route path="/notification" component={<notification />} /> */}
                     {/* <Route path="/Letters" component={<Letters />} /> */}
                     {/* <Route path="/contact" component={<contact />} /> */}

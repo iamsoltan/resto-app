@@ -11,6 +11,9 @@ function Dishes(props) {
     props.getDishes();
   }, []);
 
+   
+  const [filter_key, set_filter_key] = useState("active");
+
   let menu = [...props.dishesList];
 
   const cartAddBtn = (e) => {
@@ -61,6 +64,15 @@ function Dishes(props) {
   } else if (props.user.role) {
     if (props.user.role === "admin") {
       return (
+        <div className="dishes-component-container">
+        <div className="filtered-results">
+        <select onChange={(e)=>{set_filter_key(e.target.value)}} >
+                <option value="active">مفعل</option>
+                <option value="onHold">معلق</option>
+                <option value="showAll">إظهار جميع النتائج</option>
+        </select>
+        </div>
+
         <div className="card-container">
           <NavLink to="/add/add">
             <div
@@ -73,8 +85,14 @@ function Dishes(props) {
                 <p>أضف</p>
               </div>
             </div>
+
           </NavLink>
-          {menu.map((e) => (
+          {menu.filter(e=>{
+            if (filter_key === "showAll"){
+              console.log("filter key",filter_key)
+              return (e===e)
+            }else return (e.mode === filter_key)
+          }).map((e) => (
             <div key={e.id} className="card">
               <div
                 className="image"
@@ -93,6 +111,7 @@ function Dishes(props) {
               {cartAddBtn(e)}
             </div>
           ))}
+        </div>
         </div>
       );
     } else if (props.user.role === "user") {

@@ -10,7 +10,7 @@ function Orders(props) {
   useEffect(() => {
     props.getOrders();
   }, []);
-
+  const [filter_key, set_filter_key] = useState("pending");
   const [orderModalDisplay, setOrderModalDisplay] = useState("none");
   const [speceficOrder, setspeceficOrder] = useState({});
   let orderModalOverlay;
@@ -145,6 +145,15 @@ function Orders(props) {
     if (props.user.role === "admin") {
       if (props.orders) {
         return (
+          <div className="dishes-component-container">
+          <div className="filtered-results">
+          <select onChange={(e)=>{set_filter_key(e.target.value)}} >
+                  <option value="pending">قيد التحقق</option>
+                  <option value="denied">رفضت</option>
+                  <option value="delivred">مقبول</option>
+                  <option value="showAll">إظهار جميع النتائج</option>
+          </select>
+          </div>
           <div className="list-container">
             <table id="list-table">
               <tr>
@@ -157,7 +166,12 @@ function Orders(props) {
                 <th>قبول الطلب</th>
                 <th>عرض تفاصيل الطلب</th>
               </tr>
-              {props.orders.map((e) => (
+              {props.orders.filter(e=>{
+            if (filter_key === "showAll"){
+              console.log("filter key",filter_key)
+              return (e===e)
+            }else return (e.delivery_status === filter_key)
+          }).map((e) => (
                 <tr key={e.id}>
                   <td>{e.id}</td>
                   <td>{e.userInfo.name}</td>
@@ -211,11 +225,21 @@ function Orders(props) {
             </table>
             {order_modal()}
           </div>
+          </div>
         );
       }
     } else if (props.user.role === "user") {
       if (props.orders) {
         return (
+          <div className="dishes-component-container">
+          <div className="filtered-results">
+          <select onChange={(e)=>{set_filter_key(e.target.value)}} >
+                  <option value="pending">قيد التحقق</option>
+                  <option value="denied">رفضت</option>
+                  <option value="delivred">مقبول</option>
+                  <option value="showAll">إظهار جميع النتائج</option>
+          </select>
+          </div>
           <div className="list-container">
             <table id="list-table">
               <tr>
@@ -225,7 +249,12 @@ function Orders(props) {
                 <th>حالة الطلب</th>
                 <th>عرض تفاصيل الطلب</th>
               </tr>
-              {props.orders.map((e) => {
+              {props.orders.filter(e=>{
+            if (filter_key === "showAll"){
+              console.log("filter key",filter_key)
+              return (e===e)
+            }else return (e.delivery_status === filter_key)
+          }).map((e) => {
                 if (e.userInfo.id === props.user.id) {
                   return (
                     <tr key={e.id}>
@@ -261,6 +290,7 @@ function Orders(props) {
               })}
             </table>
             {order_modal()}
+          </div>
           </div>
         );
       }
