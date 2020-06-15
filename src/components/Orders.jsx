@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./Dishes.css";
+import "./Orders.css";
 
-import { getOrders } from "../actions/a_orders";
+import { getOrders, acceptOrders, denyOrders } from "../actions/a_orders";
 import { NavLink } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -10,12 +10,66 @@ function Orders(props) {
 
     useEffect(() => {
         props.getOrders(); 
-      }, []);
-      console.log("orders : ",props.orders);
-    //   let orders =[];
-    //   orders =[...props.orders];
-  return (<div>{(props.orders)? 
-    props.orders.map(e=>e.userInfo.name) : "hi mr idiot"}</div>)
+    }, []);
+
+    if (props.user.role) {
+        if (props.user.role === "admin"){
+            if (props.orders){
+                return (
+                    <div className="list-container">
+                    <table id="list-table">
+                    <tr>
+                      <th>معرف الطلب</th>
+                      <th>اسم العميل</th>
+                      <th>العنوان</th>
+                      <th>المبلغ</th>
+                      <th>العمليات</th>
+                      <th>رفض الطلب</th>
+                      <th>قبول الطلب</th>
+                    </tr>
+                    {props.orders.map(e=>(
+                    <tr key={e.id}>
+                      <td>{e.id}</td>
+                      <td>{e.userInfo.name}</td>
+                      <td>{e.userInfo.adress}</td>
+                      <td>{e.orderDishes.map(e=>e.price*e.quantity).reduce((t,e)=>t+e)}</td>
+                      <td>{e.delivery_status==="pending" ? "قيد التحقق" :e.delivery_status==="denied" ? "رفضت" :e.delivery_status==="delivred" ? "مقبول" :"contact dev" }</td>
+                      <td><button className="deny" onClick={()=>{props.denyOrders(e.id)}}>رفض</button></td>
+                      <td><button className="deliver" onClick={()=>{props.acceptOrders(e.id)}}>قبول</button></td>
+
+                    </tr> 
+                    ))}
+                  </table>
+                  </div>
+                )
+            }
+        }else if (props.user.role === "user"){
+            if (props.orders){
+                return ( 
+                <div className="list-container">
+                <table id="list-table">
+                <tr>
+                  <th>معرف الطلب</th>
+                  <th>العنوان</th>
+                  <th>المبلغ</th>
+                  <th>العمليات</th>
+
+                </tr>
+                {props.orders.map(e=>{if(e.userInfo.id===props.user.id){ return(
+                <tr key={e.id}>
+                  <td>{e.id}</td>
+                  <td>{e.userInfo.adress}</td>
+                  <td>{e.orderDishes.map(e=>e.price*e.quantity).reduce((t,e)=>t+e)}</td>
+                  <td>{e.delivery_status==="pending" ? "قيد التحقق" :e.delivery_status==="denied" ? "رفضت" :e.delivery_status==="delivred" ? "مقبول" :"contact dev" }</td>
+                </tr> 
+                )}})}
+              </table>
+              </div>)
+            }
+        }
+    }
+      
+  
 }
 
 export default connect(
@@ -26,67 +80,5 @@ export default connect(
       user: state.r_users,
     };
   },
-  { getOrders }
+  { getOrders, acceptOrders, denyOrders }
 )(Orders);
-
-/*
-[
-    {
-      "userInfo": {
-        "userId": "0",
-        "userName": "khalil"
-      },
-      "orderInfo": {
-        "orderId": "0",
-        "order_send_date": "06/06/2006 17:25:36",
-        "order_response": "to_deliver",
-        "order_response_date": "06/06/2006 17:26:36"
-      },
-      "orderProducts": [
-        {
-          "title": "couscous",
-          "price": "25",
-          "quantity": "2"
-        },
-        {
-          "title": "couscous",
-          "price": "25",
-          "quantity": "2"
-        },
-        {
-          "title": "couscous",
-          "price": "25",
-          "quantity": "2"
-        }
-      ]
-    },
-    {
-      "orderinfo": [
-        {
-          "id": 2,
-          "title": "سلاطة  مشوية",
-          "img": "https://www.cuisinetunisienne.tn/wp-content/uploads/2019/03/Recette-Salade-Mechouia-1080x810.jpg",
-          "price": 10,
-          "quantity": 1
-        },
-        {
-          "id": 1,
-          "title": "طاجين",
-          "img": "https://www.simpleetgourmand.fr/wp-content/uploads/tajine-tunisien-thon_01.jpg",
-          "price": 30,
-          "quantity": 1
-        }
-      ],
-      "delivery_status": "pending",
-      "userinfo": {
-        "name": "Mohamed",
-        "email": "kmkhalilo@gmail.com",
-        "password": "12345678",
-        "tel": "27 145 229",
-        "adress": "Fouchana centre 2",
-        "role": "user",
-        "cmdes_list": []
-      }
-    }
-  ]
-  */

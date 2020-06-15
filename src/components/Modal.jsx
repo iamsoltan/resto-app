@@ -1,42 +1,46 @@
-{(props.user === "none") ?
-<div>
-   <Switch>
-     <Route path="/" exatct component={ Dishes } />
-     <Redirect to="/" />
-     <Route />
-   </Switch>
- <Testimonials />
- <Footer />
+
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+
+
+
+
+
+
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
 </div>
 
-: (props.user.role) ? 
-(props.user.role === "user") ?
- <div>
-     <Switch>
-       <Route path="/" exatct component={Dishes} />
-       {/* <Route path="/orders" component={<Orders />} /> */}
-       {/* <Route path="/notification" component={<notification />} /> */}
-       {/* <Route path="/contact" component={<contact />} /> */}
-       <Redirect to="/" />
-     </Switch>
-   <Sidebar />
- </div>
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
 
-: (props.user.role === "admin") ?
- <div>
-     <Switch>
-       <Route path="/" exatct component={Dishes} />
-       {/* <Route path="/add/:add" exact component={<Editor />} /> */}
-       {/* <Route path="/edit/:dish/:iDish" component={<Editor />} /> */}
-       {/* <Route path="/orders" component={<Orders />} /> */}
-       {/* <Route path="/orders/:order/:iOrder" component={<Editor />} /> */}
-       {/* <Route path="/notification" component={<notification />} /> */}
-       {/* <Route path="/Letters" component={<Letters />} /> */}
-       {/* <Route path="/contact" component={<contact />} /> */}
-       <Redirect to="/" />
-     </Switch>
-   <Sidebar />
- </div>
-: <div>euhhh !</div>
-: <div>euhhh !</div>
-}
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>

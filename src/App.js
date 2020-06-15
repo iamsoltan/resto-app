@@ -36,8 +36,8 @@ function App(props) {
                 <Route />
               </Switch>
             </div>
-            <Testimonials />
-            <Footer />
+            {/* <Testimonials />
+            <Footer /> */}
           </div>
 
 
@@ -47,7 +47,7 @@ function App(props) {
                 <div className="app-inner-container">
                 <Switch>
                   <Route path="/" exact component={Dishes} />
-                  {/* <Route path="/orders" component={<Orders />} /> */}
+                  <Route path="/orders" component={Orders} />
                   {/* <Route path="/notification" component={<notification />} /> */}
                   {/* <Route path="/contact" component={<contact />} /> */}
                   <Redirect to="/" />

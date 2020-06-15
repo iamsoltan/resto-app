@@ -15,18 +15,18 @@ function Sidebar(props) {
     <React.Fragment>
       {props.user.role === "admin" ? (
         <div className="sidebar-container">
-          <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >menu</NavLink>
-          <NavLink exact to="/orders" className="normal-sidebar" activeClassName="active-sidebar" >orders</NavLink>
-          <NavLink exact to="/1" className="normal-sidebar" activeClassName="active-sidebar" >users</NavLink>
+          <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >لائحة الأطباق</NavLink>
+          <NavLink exact to="/orders" className="normal-sidebar" activeClassName="active-sidebar" >متابعة الطلبات</NavLink>
+          {/* <NavLink exact to="/1" className="normal-sidebar" activeClassName="active-sidebar" >users</NavLink>
           <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >testimonials</NavLink>
-          <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink>
+          <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink> */}
         </div>
       ) : props.user.role === "user" ? (
         <div className="sidebar-container">
-          <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >menu</NavLink>
-          <NavLink exact to="/1" className="normal-sidebar" activeClassName="active-sidebar" >orders</NavLink>
-          <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >notification</NavLink>
-          <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink>
+          <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >لائحة الأطباق</NavLink>
+          <NavLink exact to="/orders" className="normal-sidebar" activeClassName="active-sidebar" >متابعة الطلبات</NavLink>
+          {/* <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >notification</NavLink>
+          <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink> */}
         </div>
       ) : (
         <React.Fragment></React.Fragment>

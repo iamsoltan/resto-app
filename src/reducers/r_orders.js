@@ -2,9 +2,13 @@ import * as types from '../actions/types';
 
 const r_orders = (state = [], action) => {
 
-    if (action.type === types.GET_ORDERS) {
-        
-        console.log("orders state : ", action.payload );
+    if (action.type === types.GET_ORDERS) { 
+        return action.payload
+
+    } else if (action.type === types.DENY_ORDERS) {
+        return action.payload
+
+    } else if (action.type === types.ACCEPT_ORDERS) {
         return action.payload
 
     } else {

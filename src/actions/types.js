@@ -14,3 +14,5 @@ export const UPDATE_DISHES = "UPDATE_DISHES";
 
 
 export const GET_ORDERS = "GET_ORDERS";
+export const DENY_ORDERS = "DENY_ORDERS";
+export const ACCEPT_ORDERS = "ACCEPT_ORDERS";
