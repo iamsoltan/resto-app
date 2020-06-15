@@ -19,3 +19,9 @@ export const UPDATE_DISHES = "UPDATE_DISHES";
 export const GET_ORDERS = "GET_ORDERS";
 export const DENY_ORDERS = "DENY_ORDERS";
 export const ACCEPT_ORDERS = "ACCEPT_ORDERS";
+
+
+export const GET_FEEDBACKS = "GET_FEEDBACKS";
+export const ADD_FEEDBACKS = "ADD_FEEDBACKS";
+export const UPDATE_FEEDBACKS = "UPDATE_FEEDBACKS";
+

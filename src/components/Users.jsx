@@ -23,9 +23,9 @@ function Orders(props) {
                   set_filter_key(e.target.value);
                 }}
               >
+                <option value="showAll">إظهار جميع النتائج</option>
                 <option value="admin">مشرف</option>
                 <option value="user">زبون</option>
-                <option value="showAll">إظهار جميع النتائج</option>
               </select>
             </div>
             <div className="list-container">

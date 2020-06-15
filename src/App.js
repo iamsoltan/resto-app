@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Editor from './components/Editor';
 import Orders from './components/Orders';
 import Users from './components/Users';
+import Feedback from './components/Feedback';
 import { getDishes } from "./actions/a_dishes";
 
 
@@ -50,7 +51,7 @@ function App(props) {
                 <Switch>
                   <Route path="/" exact component={Dishes} />
                   <Route path="/orders" component={Orders} />
-                  {/* <Route path="/notification" component={<notification />} /> */}
+                  <Route path="/feedback" component={Feedback} />
                   {/* <Route path="/contact" component={<contact />} /> */}
                   <Redirect to="/" />
                 </Switch>
@@ -70,6 +71,7 @@ function App(props) {
                     <Route path="/edit/:dish/:iDish"  component={() => <Editor />} />
                     <Route path="/orders" component={Orders} />
                     <Route path="/users" component={Users} />
+                    <Route path="/feedback" component={Feedback} />
                     {/* <Route path="/notification" component={<notification />} /> */}
                     {/* <Route path="/Letters" component={<Letters />} /> */}
                     {/* <Route path="/contact" component={<contact />} /> */}

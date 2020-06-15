@@ -18,6 +18,7 @@ function Sidebar(props) {
           <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >لائحة الأطباق</NavLink>
           <NavLink exact to="/orders" className="normal-sidebar" activeClassName="active-sidebar" >متابعة الطلبات</NavLink>
           <NavLink exact to="/users" className="normal-sidebar" activeClassName="active-sidebar" >المستخدمين</NavLink>
+          <NavLink exact to="/feedback" className="normal-sidebar" activeClassName="active-sidebar" >الرسائل الواردة</NavLink>
           {/* <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >testimonials</NavLink>
           <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink> */}
         </div>
@@ -25,6 +26,7 @@ function Sidebar(props) {
         <div className="sidebar-container">
           <NavLink exact to="/" className="normal-sidebar" activeClassName="active-sidebar" >لائحة الأطباق</NavLink>
           <NavLink exact to="/orders" className="normal-sidebar" activeClassName="active-sidebar" >متابعة الطلبات</NavLink>
+          <NavLink exact to="/feedback" className="normal-sidebar" activeClassName="active-sidebar" >راسلنا</NavLink>
           {/* <NavLink exact to="/2" className="normal-sidebar" activeClassName="active-sidebar" >notification</NavLink>
           <NavLink exact to="/3" className="normal-sidebar" activeClassName="active-sidebar" >contact</NavLink> */}
         </div>

@@ -8,6 +8,7 @@
 }
 
 #list-table {
+    direction: rtl;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     margin: 0em;
