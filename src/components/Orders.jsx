@@ -111,6 +111,7 @@ function Orders(props) {
         </div>
       )
     }
+    
 
     if (props.user.role) {
         if (props.user.role === "admin"){
@@ -156,6 +157,7 @@ function Orders(props) {
                   <th>العنوان</th>
                   <th>المبلغ</th>
                   <th>حالة الطلب</th>
+                  <th>عرض تفاصيل الطلب</th>
 
                 </tr>
                 {props.orders.map(e=>{if(e.userInfo.id===props.user.id){ return(
@@ -164,9 +166,11 @@ function Orders(props) {
                   <td>{e.userInfo.adress}</td>
                   <td>{e.orderDishes.map(e=>e.price*e.quantity).reduce((t,e)=>t+e)}</td>
                   <td>{e.delivery_status==="pending" ? "قيد التحقق" :e.delivery_status==="denied" ? "رفضت" :e.delivery_status==="delivred" ? "مقبول" :"contact dev" }</td>
+                  <td><button className="cancel-btn" onClick={()=>{Odescription(e)}}>عرض</button></td>
                 </tr> 
                 )}})}
               </table>
+              {order_modal()}
               </div>)
             }
         }
